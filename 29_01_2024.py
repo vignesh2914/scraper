@@ -12,7 +12,8 @@ def create_file_path(user_keywords):
 
 def linkedin_scraper(webpage, keywords, file_path, page_number=0):
     while True:
-        next_page = f"{webpage}&keywords={keywords}&start={page_number * 25}"
+        # no of pages  to scrape from the webpage
+        next_page = f"{webpage}&keywords={keywords}&start={page_number * 50}"
         print(next_page)
 
         try:
@@ -33,6 +34,7 @@ def linkedin_scraper(webpage, keywords, file_path, page_number=0):
         if not jobs:
             break  
 
+        # fetch job details
         for job in jobs:
             job_title = job.find('h3', class_='base-search-card__title').text.strip()
 
@@ -50,7 +52,7 @@ def linkedin_scraper(webpage, keywords, file_path, page_number=0):
 
         print('Data updated')
 
-        page_number += 1
+        page_number = page_number + 1
 
 user_keywords = input("Enter the job keywords: ")
 
